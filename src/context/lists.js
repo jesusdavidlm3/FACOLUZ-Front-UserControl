@@ -73,3 +73,11 @@ export const alimentsList = [
     {label: 'Afecciones O.R.L.', value: 23},
     {label: 'Dificultades de aprendizaje', value: 24},
 ]
+
+export const userTypeList = [
+    {label: 'Administrador de sistemas', value: 0},
+    {label: 'Docente', value: 1},
+    {label: 'Estudiante', value: 2},
+    {label: 'Administrador de sistemas', value: 3},
+    {label: 'Administrador de estudios', value: 4},
+]

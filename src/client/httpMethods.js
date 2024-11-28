@@ -6,19 +6,29 @@ export class httpMethods {
 	constructor(){
 	}
 
-	async get(){
+	async get(apiAddress, value, token){
 		try{
-			let res = await axios.get(`${url}/${apiAddress}`)
-			return res
+			if(value){
+				let res = await axios.get(`${url}/${apiAddress}/${value}`, {headers: {'Authorization': `Bearer ${token}`}})
+				return res
+			}else if(value == null){
+				let res = await axios.get(`${url}/${apiAddress}/`, {headers: {'Authorization': `Bearer ${token}`}})
+				return res
+			}
 		}catch(err){
 			return(err)
 		}	
 	}
 
-	async post(apiAddress, data){
+	async post(apiAddress, data, token){
 		try{
-			let res = await axios.post(`${url}/${apiAddress}`, data)
-			return res
+			if(token){
+				let res = await axios.post(`${url}/${apiAddress}`, data, {headers: {'Authorization': `Bearer ${token}`}})
+				return res
+			}else if(token == null){
+				let res = await axios.post(`${url}/${apiAddress}`, data)
+				return res
+			}
 		}catch(err){
 			return(err)
 		}
@@ -26,7 +36,7 @@ export class httpMethods {
 
 	async put(apiAddress, data){
 		try{
-			let res = await axios.put(`${url}/${apiAddress}`)
+			let res = await axios.put(`${url}/${apiAddress}`, {headers: {'Authorization': `Bearer ${token}`}})
 			return res
 		}catch(err){
 			return(err)
@@ -35,7 +45,7 @@ export class httpMethods {
 
 	async patch(apiAddress, data){
 		try{
-			let res = await axios.patch(`${url}/${apiAddress}`)
+			let res = await axios.patch(`${url}/${apiAddress}`, {headers: {'Authorization': `Bearer ${token}`}})
 			return res
 		}catch(err){
 			return(err)
@@ -44,7 +54,7 @@ export class httpMethods {
 
 	async delete(apiAddress, value){
 		try{
-			let res = await axios.delete(`${url}/${apiAddress}/${value}`)
+			let res = await axios.delete(`${url}/${apiAddress}/${value}`, {headers: {'Authorization': `Bearer ${token}`}})
 			return res
 		}catch(err){
 			return(err)

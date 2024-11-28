@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 :root{
 	--bgColor: #003566;
 	--moduleColor: #001d3d;
+	--listItemColor: #022C53;
 	--moduleRadius: 15px;
 	--modulepPadding: 20px;
 }
@@ -8,6 +11,45 @@
 body{
 	margin: 0px;
 	background-color: var(--bgColor);
+	color: white;
+	font-family: "Poppins", sans-serif;
+}
+
+.ErrorPage{
+	background-color: tomato;
+	width: 100vw;
+	height: 100vh;
+	margin: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	h3{
+		margin: 0px;
+		transition: all .3s;
+		&:hover{
+			cursor: pointer;
+			transform: scale(1.1);
+			text-shadow: var(--shadow);
+		}
+	}
+}
+
+.NavBar{
+	background-color: var(--moduleColor);
+	margin: 0px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0px 20px;
+	width: calc(100vw - 40px);
+
+	.buttons{
+		display: flex;
+		gap: 10px;
+	}
 }
 
 .Login{
@@ -31,5 +73,46 @@ body{
 
 		h2{margin: 10px;}
 		h1{margin: 10px}
+	}
+}
+
+.UserAdministration{
+	padding: 20px;
+	height: calc(100% - 40px);
+	width: calc(100% - 40px);
+
+	.searchBar{
+		background-color: var(--moduleColor);
+		border-radius: var(--moduleRadius);
+		padding: var(--modulepPadding);
+		display: flex;
+		align-items: center;
+		gap: 15px;
+	}
+
+	.listContainer{
+		background-color: var(--moduleColor);
+		padding: var(--modulepPadding);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+		margin: 10px;
+		border-radius: var(--moduleRadius);
+
+		.listItem{
+			background-color: var(--listItemColor);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 90%;
+			border-radius: var(--moduleRadius);
+			padding: 10px 20px;
+
+			.buttons{
+				display: flex;
+				gap: 10px;
+			}
+		}
 	}
 }

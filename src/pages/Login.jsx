@@ -1,15 +1,20 @@
 import { Form, Input, Button } from 'antd'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { appContext } from '../context/appContext' 
 import { encrypt } from '../functions/hash'
 import { login } from '../client/client'
 import { useNavigate } from 'react-router-dom'
+import { LoadingOutlined } from '@ant-design/icons'
 
 const Login = () => {
 
 	const navigate = useNavigate()
-	const { messageApi, setuserData, setLogged } = useContext(appContext)
+	const { messageApi, setUserData, setLogged } = useContext(appContext)
 	const [loading, setLoading] = useState(false)
+
+	useEffect(() => {
+		setLogged(false)
+	}, [])
 
 	const submitLogin = async () => {
 		setLoading(true)
@@ -22,7 +27,9 @@ const Login = () => {
 		}
 		console.log(data)
 		let res = await login(data)
+		console.log(res)
 		if(res.status == 200){
+			setUserData(res.data)
 			setLogged(true)
 			navigate('/home')
 		}else{
@@ -32,7 +39,6 @@ const Login = () => {
 			})
 			setLoading(false)
 		}
-		console.log(res)
 	}
 
 	return(
@@ -47,7 +53,7 @@ const Login = () => {
 					<Input.Password placeholder='Contraseña'disabled={loading} />
 				</Form.Item>
 
-				<Button onClick={submitLogin}disabled={loading} >Iniciar Sesion</Button>
+				<Button onClick={submitLogin} type='primary' disabled={loading} > {loading ? (<>{<LoadingOutlined />}Cargando...</>):('Iniciar sesion')} </Button>
 			</Form>
 		</div>
 	)

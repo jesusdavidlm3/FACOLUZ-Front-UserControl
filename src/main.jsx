@@ -7,6 +7,7 @@ import Root from './pages/Root'
 import ErrorPage from './pages/ErrorPage'
 import Login from './pages/Login'
 import Home from './pages/Home'
+import UserAdministration from './pages/UserAdministration'
 
 const router = createBrowserRouter([{
   path: '/',
@@ -16,9 +17,12 @@ const router = createBrowserRouter([{
     path: '/login',
     element: <Login/>
   },{
-    path: 'home',
+    path: '/home',
     element: <Home />
-  }]
+  },{
+    path: '/userAdministration',
+    element: <UserAdministration />
+  } ]
 }])
 
 createRoot(document.getElementById('root')).render(
