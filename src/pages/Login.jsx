@@ -25,9 +25,7 @@ const Login = () => {
 			identification: identification,
 			passwordHash: await encrypt(password)
 		}
-		console.log(data)
 		let res = await login(data)
-		console.log(res)
 		if(res.status == 200){
 			setUserData(res.data)
 			setLogged(true)
@@ -43,7 +41,7 @@ const Login = () => {
 
 	return(
 		<div className='Login'>
-			<Form disabled={loading} className='loginForm'>
+			<Form disabled={loading} className='loginForm' onFinish={submitLogin}>
 				<h1>Modulo administrativo</h1>
 				<h2>Iniciar sesion</h2>
 				<Form.Item name='identification'>
@@ -53,7 +51,7 @@ const Login = () => {
 					<Input.Password placeholder='Contraseña'disabled={loading} />
 				</Form.Item>
 
-				<Button onClick={submitLogin} type='primary' disabled={loading} > {loading ? (<>{<LoadingOutlined />}Cargando...</>):('Iniciar sesion')} </Button>
+				<Button htmlType='submit' type='primary' disabled={loading} > {loading ? (<>{<LoadingOutlined />}Cargando...</>):('Iniciar sesion')} </Button>
 			</Form>
 		</div>
 	)

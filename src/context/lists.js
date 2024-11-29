@@ -1,3 +1,7 @@
+export function searchOnList(list, id){
+    return list.find(item => item.value == id).label
+}
+
 export const instructionGradeList = [
     {label: 'Ninguno', value: 0},
     {label: 'Prescolar', value: 1},

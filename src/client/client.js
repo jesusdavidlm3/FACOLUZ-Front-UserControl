@@ -14,3 +14,7 @@ export async function login(data){
 export async function getAllUsers() {
 	return await http.get('api/getAllUsers', null, token)
 }
+
+export async function createUser(data) {
+	return await http.post('api/createUser', data, token)
+}
