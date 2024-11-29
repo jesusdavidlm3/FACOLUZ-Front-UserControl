@@ -6,7 +6,7 @@ export class httpMethods {
 	constructor(){
 	}
 
-	async get(apiAddress, value, token){
+	async get(apiAddress, token, value){
 		try{
 			if(value){
 				let res = await axios.get(`${url}/${apiAddress}/${value}`, {headers: {'Authorization': `Bearer ${token}`}})
@@ -20,7 +20,7 @@ export class httpMethods {
 		}	
 	}
 
-	async post(apiAddress, data, token){
+	async post(apiAddress, token, data){
 		try{
 			if(token){
 				let res = await axios.post(`${url}/${apiAddress}`, data, {headers: {'Authorization': `Bearer ${token}`}})
@@ -34,7 +34,7 @@ export class httpMethods {
 		}
 	}
 
-	async put(apiAddress, data){
+	async put(apiAddress, token, data){
 		try{
 			let res = await axios.put(`${url}/${apiAddress}`, {headers: {'Authorization': `Bearer ${token}`}})
 			return res
@@ -43,7 +43,7 @@ export class httpMethods {
 		}
 	}
 
-	async patch(apiAddress, data){
+	async patch(apiAddress, token, data){
 		try{
 			let res = await axios.patch(`${url}/${apiAddress}`, {headers: {'Authorization': `Bearer ${token}`}})
 			return res
@@ -52,7 +52,7 @@ export class httpMethods {
 		}
 	}
 
-	async delete(apiAddress, value){
+	async delete(apiAddress, token, value){
 		try{
 			let res = await axios.delete(`${url}/${apiAddress}/${value}`, {headers: {'Authorization': `Bearer ${token}`}})
 			return res

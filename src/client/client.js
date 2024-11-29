@@ -4,7 +4,7 @@ const http = new httpMethods()
 let token
 
 export async function login(data){
-	const res = await http.post('api/login', data, null)
+	const res = await http.post('api/login', null, data)
 	if(res.status == 200){
 		token = res.data.jwt
 	}
@@ -12,9 +12,13 @@ export async function login(data){
 }
 
 export async function getAllUsers() {
-	return await http.get('api/getAllUsers', null, token)
+	return await http.get('api/getAllUsers', token, null)
 }
 
 export async function createUser(data) {
-	return await http.post('api/createUser', data, token)
+	return await http.post('api/createUser', token, data)
+}
+
+export async function deleteUser(id){
+	return await http.delete('api/deleteUser', token, id)
 }
