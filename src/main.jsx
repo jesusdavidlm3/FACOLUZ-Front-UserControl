@@ -8,6 +8,8 @@ import ErrorPage from './pages/ErrorPage'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import UserAdministration from './pages/UserAdministration'
+import UserReactivation from './pages/UserReactivation'
+import ChangeLogs from './pages/ChangeLogs'
 
 const router = createBrowserRouter([{
   path: '/',
@@ -22,6 +24,12 @@ const router = createBrowserRouter([{
   },{
     path: '/userAdministration',
     element: <UserAdministration />
+  }, {
+    path: '/userReactivation',
+    element: <UserReactivation />
+  }, {
+    path: '/changeLogs',
+    element: <ChangeLogs />
   } ]
 }])
 

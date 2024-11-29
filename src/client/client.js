@@ -15,6 +15,10 @@ export async function getAllUsers() {
 	return await http.get('api/getAllUsers', token, null)
 }
 
+export async function getDeactivatedUsers() {
+	return await http.get('api/getDeactivatedUsers', token, null)
+}
+
 export async function createUser(data) {
 	return await http.post('api/createUser', token, data)
 }
@@ -22,3 +26,12 @@ export async function createUser(data) {
 export async function deleteUser(id){
 	return await http.delete('api/deleteUser', token, id)
 }
+
+export async function reactivateUser(id){
+	return await http.patch('api/reactivateUser', token, id)
+}
+
+// export async function editUser(data) {
+// 	return await http.patch('api/editUser', token, id)
+// }
+

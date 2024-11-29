@@ -36,7 +36,7 @@ export class httpMethods {
 
 	async put(apiAddress, token, data){
 		try{
-			let res = await axios.put(`${url}/${apiAddress}`, {headers: {'Authorization': `Bearer ${token}`}})
+			let res = await axios.put(`${url}/${apiAddress}`, data, {headers: {'Authorization': `Bearer ${token}`}})
 			return res
 		}catch(err){
 			return(err)
@@ -45,7 +45,7 @@ export class httpMethods {
 
 	async patch(apiAddress, token, data){
 		try{
-			let res = await axios.patch(`${url}/${apiAddress}`, {headers: {'Authorization': `Bearer ${token}`}})
+			let res = await axios.patch(`${url}/${apiAddress}`, data, {headers: {'Authorization': `Bearer ${token}`}})
 			return res
 		}catch(err){
 			return(err)

@@ -52,7 +52,11 @@ const NavBar = () => {
 			</div>
 
 			<Drawer title='Menu' open={menuOpen} onClose={() => setMenuOpen(false)} >
-				<Button variant='solid' color='primary' onClick={() => {navigate('/userAdministration'); setMenuOpen(false)}} >Administracion de usuarios</Button>
+				<div style={{display: 'flex', flexDirection: 'column', alignItems: 'start', gap: '5px'}}>
+					<Button variant='solid' color='primary' onClick={() => {navigate('/userAdministration'); setMenuOpen(false)}} >Administracion de usuarios</Button>
+					<Button variant='solid' color='primary' onClick={() => {navigate('/userReactivation'); setMenuOpen(false)}} >Reactivacion de usuarios</Button>
+					<Button variant='solid' color='primary' onClick={() => {navigate('/changeLogs'); setMenuOpen(false)}} >Registro de cambios</Button>
+				</div>
 			</Drawer>
 
 			<LogoutModal

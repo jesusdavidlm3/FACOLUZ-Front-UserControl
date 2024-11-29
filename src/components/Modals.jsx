@@ -1,10 +1,10 @@
-import { Modal, Button, Input, InputNumber, Select, Form, Space } from 'antd'
+import { Modal, Button, Input, InputNumber, Select, Form, Space, message } from 'antd'
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { appContext } from '../context/appContext'
 import * as lists from '../context/lists'
 import { encrypt } from '../functions/hash'
-import { createUser, deleteUser } from '../client/client'
+import { reactivateUser, deleteUser, createUser } from '../client/client'
 
 export const LogoutModal = ({open, onCancel}) => {
 
@@ -138,5 +138,101 @@ export const DeleteUserModal = ({open, onCancel, id, updateList}) => {
 				<Button disabled={loading} variant='solid' color='danger' onClick={handleDelete}>Eliminar</Button>
 			]}
 		></Modal>
+	)
+}
+
+// export const EditUserModal = ({open, onCancel, updateList, info}) => {
+
+// 	const {messageApi} = useContext(appContext)
+// 	const [loading, setLoading] = useState(false)
+
+// 	const submitUpdate = async () => {
+// 		setLoading(true)
+// 		let res = await 
+// 		if(res.status == 200){
+// 			setLoading(false)
+// 			updateList()
+// 			messageApi.open({
+// 				type: 'success',
+// 				content: 'Editado con exito'
+// 			})
+// 			onCancel()
+// 		}else{
+// 			setLoading(false)
+// 			messageApi.open({
+// 				type: 'error',
+// 				content: 'ah ocurrido un error'
+// 			})
+// 		}
+// 	}
+
+// 	return(
+// 		<Modal
+// 			destroyOnClose
+// 			open={open}
+// 			onCancel={onCancel}
+// 			title='Editar el usuario'
+// 			footer={[
+// 				<Button variant='text' color='primary' onClick={onCancel}>Cancelar</Button>,
+// 				<Button variant='solid' color='primary' onClick={}>Guardar cambios</Button>
+// 			]}
+// 		>
+
+// 		</Modal>
+// 	)
+// }
+
+export const ReactivateUserModal = ({open, onCancel, updateList, id}) => {
+	
+	const {messageApi} = useContext(appContext)
+	const [loading, setLoading] = useState(false)
+	const [newPassword, setNewPassword] = useState('')
+	console.log(id)
+
+	const submitReactivation = async () => {
+		if(newPassword == ''){
+			messageApi.open({
+				type: 'error',
+				content: 'Ingrese una contraseña'
+			})
+		}else{
+			const data = {
+				id: id,
+				newPassword: await encrypt(newPassword)
+			}
+			let res = await reactivateUser(data)
+			if(res.status == 200){
+				setLoading(false)
+				setNewPassword('')
+				messageApi.open({
+					type: 'success',
+					content: 'Usuario reactivado'
+				})
+				updateList()
+				onCancel()
+			}else{
+				setLoading(false)
+				messageApi.open({
+					type: 'error',
+					content: 'ah ocurrido un error'
+				})
+			}
+		}
+		
+	}
+
+	return(
+		<Modal
+			title='Reactivar a este usuario?'
+			destroyOnClose
+			open={open}
+			onCancel={() => {onCancel(); setNewPassword(false)}}
+			footer={[
+				<Button variant='text' color='primary' onClick={() => {onCancel(); setNewPassword(false)}}>Cancelar</Button>,
+				<Button variant='solid' color='primary' onClick={submitReactivation}>Reactivar</Button>
+			]}
+		>
+			<Input.Password placeholder='Contraseña nueva' onChange={(e) => setNewPassword(e.target.value)}/>
+		</Modal>
 	)
 }

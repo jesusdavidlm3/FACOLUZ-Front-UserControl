@@ -13,6 +13,8 @@ body{
 	background-color: var(--bgColor);
 	color: white;
 	font-family: "Poppins", sans-serif;
+	width: 100vw;
+	height: 100vh;
 }
 
 .ErrorPage{
@@ -73,6 +75,25 @@ body{
 
 		h2{margin: 10px;}
 		h1{margin: 10px}
+	}
+}
+.Home{
+	padding: 20px;
+	height: calc(100% - 40px);
+	width: calc(100% - 40px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+
+	h3{
+		width: 40%;
+	}
+
+	h1{
+		font-size: 50px;
+		margin: 0px
 	}
 }
 
