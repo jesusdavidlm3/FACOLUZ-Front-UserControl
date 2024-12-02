@@ -141,53 +141,12 @@ export const DeleteUserModal = ({open, onCancel, id, updateList}) => {
 	)
 }
 
-// export const EditUserModal = ({open, onCancel, updateList, info}) => {
-
-// 	const {messageApi} = useContext(appContext)
-// 	const [loading, setLoading] = useState(false)
-
-// 	const submitUpdate = async () => {
-// 		setLoading(true)
-// 		let res = await 
-// 		if(res.status == 200){
-// 			setLoading(false)
-// 			updateList()
-// 			messageApi.open({
-// 				type: 'success',
-// 				content: 'Editado con exito'
-// 			})
-// 			onCancel()
-// 		}else{
-// 			setLoading(false)
-// 			messageApi.open({
-// 				type: 'error',
-// 				content: 'ah ocurrido un error'
-// 			})
-// 		}
-// 	}
-
-// 	return(
-// 		<Modal
-// 			destroyOnClose
-// 			open={open}
-// 			onCancel={onCancel}
-// 			title='Editar el usuario'
-// 			footer={[
-// 				<Button variant='text' color='primary' onClick={onCancel}>Cancelar</Button>,
-// 				<Button variant='solid' color='primary' onClick={}>Guardar cambios</Button>
-// 			]}
-// 		>
-
-// 		</Modal>
-// 	)
-// }
-
 export const ReactivateUserModal = ({open, onCancel, updateList, id}) => {
 	
 	const {messageApi} = useContext(appContext)
 	const [loading, setLoading] = useState(false)
 	const [newPassword, setNewPassword] = useState('')
-	console.log(id)
+	console.log(id) 
 
 	const submitReactivation = async () => {
 		if(newPassword == ''){
