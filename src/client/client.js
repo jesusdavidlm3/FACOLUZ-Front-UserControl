@@ -38,3 +38,7 @@ export async function changePassword(data) {
 export async function changeUserType(data) {
 	return await http.patch('api/changeUserType', token, data)
 }
+
+export async function getAllChangeLogs() {
+	return await http.get('api/getAllChangeLogs', token, null)
+}

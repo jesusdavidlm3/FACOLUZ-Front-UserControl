@@ -137,3 +137,21 @@ body{
 		}
 	}
 }
+
+.ChangeLogs{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--moduleColor);
+	margin: 20px;
+	height: calc(100% - 40px);
+	width: calc(100% - 40px);
+	border-radius: var(--moduleRadius);
+
+	.logItem{
+		background-color: var(--listItemColor);
+		margin: 5px;
+		padding: 0px 10px;
+		border-radius: var(--moduleRadius);
+	}
+}
