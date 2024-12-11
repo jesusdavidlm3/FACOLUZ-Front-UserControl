@@ -31,7 +31,6 @@ export async function reactivateUser(id){
 	return await http.patch('api/reactivateUser', token, id)
 }
 
-// export async function editUser(data) {
-// 	return await http.patch('api/editUser', token, id)
-// }
-
+export async function changePassword(data) {
+	return await http.patch('api/changePassword', token, data)
+}

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { appContext } from '../context/appContext'
 import * as lists from '../context/lists'
 import { encrypt } from '../functions/hash'
-import { reactivateUser, deleteUser, createUser } from '../client/client'
+import { reactivateUser, deleteUser, createUser, changePassword } from '../client/client'
 
 export const LogoutModal = ({open, onCancel}) => {
 
@@ -189,6 +189,54 @@ export const ReactivateUserModal = ({open, onCancel, updateList, id}) => {
 			footer={[
 				<Button variant='text' color='primary' onClick={() => {onCancel(); setNewPassword(false)}}>Cancelar</Button>,
 				<Button variant='solid' color='primary' onClick={submitReactivation}>Reactivar</Button>
+			]}
+		>
+			<Input.Password placeholder='Contraseña nueva' onChange={(e) => setNewPassword(e.target.value)}/>
+		</Modal>
+	)
+}
+
+export const ChangePasswordModal = ({open, onCancel, info}) => {
+
+	const {messageApi} = useContext(appContext)
+	const [loading, setLoading] = useState(false)
+	const [newPassword, setNewPassword] = useState('')
+
+	const submitPasswordChange = async () => {
+		const data = {
+			userId: info.id,
+			newPassword: await encrypt(newPassword)
+		}
+		let res = await changePassword(data)
+		if(res.status == 200){
+			messageApi.open({
+				type: 'success',
+				content: 'Contraseña actualizada'
+			})
+			setLoading(false)
+			onCancel()
+		}else{
+			setLoading(false)
+			messageApi.open({
+				type: 'error',
+				content: res.response.data
+			})
+		}
+	}
+
+	return(
+		<Modal
+			destroyOnClose
+			title='Cambiar contraseña del usuario'
+			onCancel={onCancel}
+			open={open}
+			footer={[
+				<Button variant='text' color='danger' onClick={onCancel} disabled={loading}>Cancelar</Button>,
+				<Button
+					type='primary'
+					onClick={submitPasswordChange}
+					disabled={loading || newPassword == ''}
+				>Aceptar</Button>
 			]}
 		>
 			<Input.Password placeholder='Contraseña nueva' onChange={(e) => setNewPassword(e.target.value)}/>
