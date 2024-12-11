@@ -84,3 +84,10 @@ export const userTypeList = [
     {label: 'Estudiante', value: 2},
     {label: 'Administrador de estudios', value: 3},
 ]
+
+export const changeLogsActionType = [
+    {label: 'Crear usuario', value: 0},
+    {label: 'Desactivar usuario', value: 1},
+    {label: 'Reactivar usuario', value: 2},
+    {label: 'Editar usuario', value: 3},
+]
