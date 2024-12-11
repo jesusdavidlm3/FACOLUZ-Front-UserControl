@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Input, Button, Tooltip } from 'antd'
 import {EditOutlined, UnlockOutlined ,DeleteOutlined } from '@ant-design/icons'
-import { AddNewUserModal as AddNewUser, DeleteUserModal as DeleteUser, ChangePasswordModal as ChangePassword, ChangePasswordModal } from '../components/Modals'
+import { AddNewUserModal as AddNewUser, DeleteUserModal as DeleteUser, ChangePasswordModal as ChangePassword, ChangeUserTypeModal as ChangeUserType } from '../components/Modals'
 import { getAllUsers } from '../client/client'
 import { searchOnList, identificationList, userTypeList } from '../context/lists'
 
@@ -14,7 +14,6 @@ const UserAdministration = () => {
 	//Control de modals
 	const [addNewUserModal, setNewUserModal] = useState(false)
 	const [deleteUserModal, setDeleteUserModal] = useState(false)
-	const [edituserModal, setEditUserModal] = useState(false)
 	const [changePasswordModal, setChangePasswordModal] = useState(false)
 	const [changeTypeModal, setChangeTypeModal] = useState(false)
 
@@ -42,7 +41,7 @@ const UserAdministration = () => {
 						</div>
 						<div className='buttons'>
 							<Tooltip onClick={() => {setSelectedItem(item); setChangePasswordModal(true)}} title='Cambiar contraseña'><Button shape='circle' variant='solid' color='primary' size='large' icon={<UnlockOutlined />} /></Tooltip>
-							<Tooltip onClick={() => {setSelectedItem(item); setEditUserModal(true)}} title='Cambiar tipo'><Button shape='circle' variant='solid' color='primary' size='large' icon={<EditOutlined />} /></Tooltip>
+							<Tooltip onClick={() => {setSelectedItem(item); setChangeTypeModal(true)}} title='Cambiar tipo'><Button shape='circle' variant='solid' color='primary' size='large' icon={<EditOutlined />} /></Tooltip>
 							<Tooltip onClick={() => {setSelectedItem(item); setDeleteUserModal(true)}} title='Eliminar'><Button shape='circle' variant='solid' color='danger' size='large' icon={<DeleteOutlined />} /></Tooltip>
 						</div>
 					</div>
@@ -65,6 +64,12 @@ const UserAdministration = () => {
 			<ChangePassword 
 				open={changePasswordModal}
 				onCancel={() => setChangePasswordModal(false)}
+				info={selectedItem}
+			/>
+
+			<ChangeUserType
+				open={changeTypeModal}
+				onCancel={() => setChangeTypeModal(false)}
 				info={selectedItem}
 			/>
 		</div>

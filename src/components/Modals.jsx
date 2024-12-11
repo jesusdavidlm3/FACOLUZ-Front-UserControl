@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { appContext } from '../context/appContext'
 import * as lists from '../context/lists'
 import { encrypt } from '../functions/hash'
-import { reactivateUser, deleteUser, createUser, changePassword } from '../client/client'
+import { reactivateUser, deleteUser, createUser, changePassword, changeUserType } from '../client/client'
 
 export const LogoutModal = ({open, onCancel}) => {
 
@@ -240,6 +240,58 @@ export const ChangePasswordModal = ({open, onCancel, info}) => {
 			]}
 		>
 			<Input.Password placeholder='Contraseña nueva' onChange={(e) => setNewPassword(e.target.value)}/>
+		</Modal>
+	)
+}
+
+export const ChangeUserTypeModal = ({open, onCancel, info}) => {
+
+	const [loading, setLoading] = useState(false)
+	const [selectedType, setSelectedType] = useState(info.type)
+	const {messageApi} = useContext(appContext)
+
+	const submitChangeType = async () => {
+		setLoading(true)
+		const data = {
+			userId: info.id,
+			newType: selectedType
+		}
+		let res = await changeUserType(data)
+		if(res.status == 200){
+			setLoading(false)
+			onCancel()
+			messageApi.open({
+				type: 'success',
+				content: 'Usuario actualizado'
+			})
+		}else{
+			setLoading(false)
+			messageApi.open({
+				type: 'error',
+				content: res.response.data
+			})
+		}
+	}
+	return(
+		<Modal
+			destroyOnClose
+			title='Cambiar tipo de usuario'
+			onCancel={() => {onCancel(); setSelectedType('')}}
+			open={open}
+			footer={[
+				<Button variant='text' color='danger' onClick={() => {onCancel(); setSelectedType('')}} disabled={loading}>Cancelar</Button>,
+				<Button
+					type='primary'
+					onClick={submitChangeType}
+					disabled={loading}
+				>Aceptar</Button>
+			]}
+		>
+			<Select 
+				options={lists.userTypeList}
+				onChange={(e) => setSelectedType(e)}
+				defaultValue={info.type}
+			/>
 		</Modal>
 	)
 }
