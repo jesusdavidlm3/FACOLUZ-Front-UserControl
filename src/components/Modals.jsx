@@ -5,6 +5,7 @@ import { appContext } from '../context/appContext'
 import * as lists from '../context/lists'
 import { encrypt } from '../functions/hash'
 import { reactivateUser, deleteUser, createUser, changePassword, changeUserType } from '../client/client'
+import React from 'react'
 
 export const LogoutModal = ({open, onCancel}) => {
 

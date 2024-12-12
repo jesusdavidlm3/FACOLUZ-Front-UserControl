@@ -2,6 +2,8 @@ import { getAllChangeLogs } from '../client/client'
 import { useEffect, useState } from 'react'
 import { searchOnList } from '../context/lists'
 import * as lists from '../context/lists'
+import React from 'react'
+
 
 const ChangeLogs = () => {
 

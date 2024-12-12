@@ -4,6 +4,7 @@ import {EditOutlined, UnlockOutlined ,DeleteOutlined } from '@ant-design/icons'
 import { AddNewUserModal as AddNewUser, DeleteUserModal as DeleteUser, ChangePasswordModal as ChangePassword, ChangeUserTypeModal as ChangeUserType } from '../components/Modals'
 import { getAllUsers } from '../client/client'
 import { searchOnList, identificationList, userTypeList } from '../context/lists'
+import React from 'react'
 
 const UserAdministration = () => {
 

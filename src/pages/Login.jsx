@@ -5,6 +5,8 @@ import { encrypt } from '../functions/hash'
 import { login } from '../client/client'
 import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons'
+import React from 'react'
+
 
 const Login = () => {
 

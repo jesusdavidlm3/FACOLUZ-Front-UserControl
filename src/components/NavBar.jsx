@@ -4,6 +4,7 @@ import { useState, useContext } from 'react'
 import { appContext } from '../context/appContext'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { LogoutModal } from './Modals'
+import React from 'react'
 
 const NavBar = () => {
 

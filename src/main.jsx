@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client'
+import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ConfigProvider, theme } from 'antd'
 import './style.scss'
