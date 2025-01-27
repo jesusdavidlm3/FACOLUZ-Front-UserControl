@@ -1,8 +1,8 @@
 {
-  "name": "luz-odontologia-administracionfrontend",
-  "productName": "luz-odontologia-administracionfrontend",
+  "name": "facoluz-front-adminsoftware",
+  "productName": "FACOLUZ-Front-AdminSoftware",
   "version": "1.0.0",
-  "description": "luz-odontologia-administracionfrontend",
+  "description": "FACOLUZ-Front-AdminSoftware",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
