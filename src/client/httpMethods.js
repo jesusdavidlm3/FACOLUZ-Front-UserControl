@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'http://localhost:3000'
+const url = 'http://10.3.24.29:3001'
 
 export class httpMethods {
 	constructor(){
