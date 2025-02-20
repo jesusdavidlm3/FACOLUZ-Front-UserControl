@@ -3,16 +3,18 @@ import { useContext, useEffect, useState } from 'react'
 import { appContext } from '../context/appContext' 
 import { encrypt } from '../functions/hash'
 import { login } from '../client/client'
-import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons'
 import React from 'react'
+import { routerContext } from '../context/routerContext'
 
 
 const Login = () => {
 
-	const navigate = useNavigate()
-	const { messageApi, setUserData, setLogged } = useContext(appContext)
+
+
 	const [loading, setLoading] = useState(false)
+	const {setView} = useContext(routerContext)
+	const { messageApi, setUserData, setLogged } = useContext(appContext)
 
 	useEffect(() => {
 		setLogged(false)
@@ -31,7 +33,7 @@ const Login = () => {
 		if(res.status == 200){
 			setUserData(res.data)
 			setLogged(true)
-			navigate('/home')
+			setView(Login)
 		}else{
 			messageApi.open({
 				type: 'error',

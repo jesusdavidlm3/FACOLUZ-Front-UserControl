@@ -2,17 +2,16 @@ import { Button, Tooltip, Drawer, Modal } from 'antd'
 import { LogoutOutlined, MenuOutlined, LeftOutlined } from '@ant-design/icons'
 import { useState, useContext } from 'react'
 import { appContext } from '../context/appContext'
-import { useLocation, useNavigate } from 'react-router-dom'
 import { LogoutModal } from './Modals'
 import React from 'react'
+import { routerContext } from '../context/routerContext'
 
 const NavBar = () => {
 
 	const [menuOpen, setMenuOpen] = useState(false)
 	const [confirmLogout, setConfirmLogout] = useState(false)
 	const {userData} = useContext(appContext)
-	const navigate = useNavigate()
-	const location = useLocation()
+	const {setView} = useContext(routerContext)
 
 	return(
 		<div className='NavBar'>
@@ -24,7 +23,7 @@ const NavBar = () => {
 					<Tooltip title='Volver'>
 						<Button
 							shape='circle'
-							onClick={() => navigate(-1)}
+							// onClick={() => navigate(-1)}
 							variant='solid'
 							icon={<LeftOutlined />}
 							size='large' 
@@ -54,9 +53,9 @@ const NavBar = () => {
 
 			<Drawer title='Menu' open={menuOpen} onClose={() => setMenuOpen(false)} >
 				<div style={{display: 'flex', flexDirection: 'column', alignItems: 'start', gap: '5px'}}>
-					<Button variant='solid' color='primary' onClick={() => {navigate('/userAdministration'); setMenuOpen(false)}} >Administracion de usuarios</Button>
-					<Button variant='solid' color='primary' onClick={() => {navigate('/userReactivation'); setMenuOpen(false)}} >Reactivacion de usuarios</Button>
-					<Button variant='solid' color='primary' onClick={() => {navigate('/changeLogs'); setMenuOpen(false)}} >Registro de cambios</Button>
+					<Button variant='solid' color='primary' onClick={() => {setView('UserAdministration'); setMenuOpen(false)}} >Administracion de usuarios</Button>
+					<Button variant='solid' color='primary' onClick={() => {setView('UserReactivation'); setMenuOpen(false)}} >Reactivacion de usuarios</Button>
+					<Button variant='solid' color='primary' onClick={() => {setView('ChangeLogs'); setMenuOpen(false)}} >Registro de cambios</Button>
 				</div>
 			</Drawer>
 

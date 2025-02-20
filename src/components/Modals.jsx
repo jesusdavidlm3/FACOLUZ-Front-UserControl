@@ -1,21 +1,21 @@
 import { Modal, Button, Input, InputNumber, Select, Form, Space, message } from 'antd'
 import { useState, useEffect, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { appContext } from '../context/appContext'
 import * as lists from '../context/lists'
 import { encrypt } from '../functions/hash'
 import { reactivateUser, deleteUser, createUser, changePassword, changeUserType } from '../client/client'
 import React from 'react'
+import { routerContext } from '../context/routerContext'
 
 export const LogoutModal = ({open, onCancel}) => {
 
 	const {setUserData, setLogged} = useContext(appContext)
-	const navigate = useNavigate()
+	const {setView} = useContext(routerContext)
 
 	const logout = () => {
 		setUserData('')
 		setLogged(false)
-		navigate('/login')
+		setView('Login')
 	}
 
 	return(
