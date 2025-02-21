@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const url = 'http://10.3.24.29:3001'
+const ip = import.meta.env.VITE_BACK_ADDRESS
+const url = `${ip}:3001`
 
 export class httpMethods {
 	constructor(){

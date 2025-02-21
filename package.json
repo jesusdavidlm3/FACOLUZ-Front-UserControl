@@ -1,6 +1,6 @@
 {
   "name": "facoluz-front-adminsoftware",
-  "productName": "FACOLUZ-Front-AdminSoftware Product",
+  "productName": "facoluz-front-adminsoftware",
   "version": "1.0.0",
   "description": "FACOLUZ-Front-AdminSoftware",
   "main": ".vite/build/main.js",
