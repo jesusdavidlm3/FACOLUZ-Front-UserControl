@@ -10,8 +10,6 @@ import { routerContext } from '../context/routerContext'
 
 const Login = () => {
 
-
-
 	const [loading, setLoading] = useState(false)
 	const {setView} = useContext(routerContext)
 	const { messageApi, setUserData, setLogged } = useContext(appContext)
@@ -31,9 +29,9 @@ const Login = () => {
 		}
 		let res = await login(data)
 		if(res.status == 200){
+			setView("Home")
 			setUserData(res.data)
 			setLogged(true)
-			setView(Login)
 		}else{
 			messageApi.open({
 				type: 'error',
