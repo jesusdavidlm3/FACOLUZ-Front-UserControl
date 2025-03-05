@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Input, Button, Tooltip } from 'antd'
 import {ApiOutlined } from '@ant-design/icons'
 import { getDeactivatedUsers } from '../client/client'
 import { searchOnList, identificationList, userTypeList } from '../context/lists'
 import { ReactivateUserModal as ReactivateUser } from '../components/Modals'
-import React from 'react'
-
+import React, { useContext } from 'react'
+import { appContext } from '../context/appContext'
 
 const UserReactivation = () => {
+	const {contextHolder} = useContext(appContext)
 
 	//Control de la UI
 	const [showList, setShowList] = useState([])
@@ -29,6 +30,7 @@ const UserReactivation = () => {
 
 	return(
 		<div className='UserAdministration'>
+			{contextHolder}
 			<div className='searchBar' >
 				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' />
 			</div>

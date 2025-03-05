@@ -50,7 +50,7 @@ export const AddNewUserModal = ({open, onCancel, updateList}) => {
 		setLoading(true)
 		const data = {
 			idType: idType,
-			idNumber: `${idNumber}`,
+			id: idNumber,
 			name: name,
 			lastname: lastname,
 			password: await encrypt(password),

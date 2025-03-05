@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Input, Button, Tooltip } from 'antd'
 import {EditOutlined, UnlockOutlined ,DeleteOutlined } from '@ant-design/icons'
 import { AddNewUserModal as AddNewUser, DeleteUserModal as DeleteUser, ChangePasswordModal as ChangePassword, ChangeUserTypeModal as ChangeUserType } from '../components/Modals'
 import { getAllUsers } from '../client/client'
 import { searchOnList, identificationList, userTypeList } from '../context/lists'
-import React from 'react'
+import { appContext } from '../context/appContext'
 
 const UserAdministration = () => {
+	const {contextHolder} = useContext(appContext)
 
 	//Control de la UI
 	const [showList, setShowList] = useState([])
@@ -30,6 +31,7 @@ const UserAdministration = () => {
 
 	return(
 		<div className='UserAdministration'>
+			{contextHolder}
 			<div className='searchBar' >
 				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' />
 				<Button variant='solid' color='primary' onClick={() => setNewUserModal(true)}>Agregar usuario</Button>
