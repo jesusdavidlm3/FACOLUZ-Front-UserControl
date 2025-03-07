@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react'
 import { appContext } from '../context/appContext'
 import * as lists from '../context/lists'
 import { encrypt } from '../functions/hash'
-import { reactivateUser, deleteUser, createUser, changePassword, changeUserType } from '../client/client'
+import { reactivateUser, deleteUser, createUser, changePassword, changeUserType ,getIdUsers} from '../client/client'
 import React from 'react'
 import { routerContext } from '../context/routerContext'
 
@@ -22,7 +22,7 @@ export const LogoutModal = ({open, onCancel}) => {
 		<Modal
 			title='Cerrar sesion?'
 			open={open}
-			onCancel={onCancel}
+			closable={false}
 			footer={[
 				<Button variant='solid' color='danger' onClick={logout} >Cerrar sesion</Button>,
 				<Button onClick={onCancel} variant='text' >Cancelar</Button>
@@ -44,34 +44,84 @@ export const AddNewUserModal = ({open, onCancel, updateList}) => {
 	const [name, setName] = useState('')
 	const [lastname, setLastname] = useState('')
 	const [password, setPassword] = useState('')
+	const [confirmPassword,setConfirmPassword] =useState('')
 	const [userType, setUserType] = useState('')
 
-	const submitNewUser = async () => {
-		setLoading(true)
-		const data = {
-			idType: idType,
-			id: idNumber,
-			name: name,
-			lastname: lastname,
-			password: await encrypt(password),
-			userType: userType
-		}
 
-		const res = await createUser(data)
-		if(res.status == 200){
-			setLoading(false)
-			messageApi.open({
-				type: 'success',
-				content: 'Usuario creado con exito'
-			})
-			updateList()
-			onCancel()
-		}else{
-			setLoading(false)
+	async function findUser(id){
+		let res = await getIdUsers(id)
+
+		console.log(res)
+		
+		switch (res.data[0].active) {
+			case 0:
+				messageApi.open({
+					type: 'error',
+					content: 'El usuario con esa cedula existe pero esta inactivo'
+				})
+				setLoading(true)
+				break;
+			case 1:
+				messageApi.open({
+					type: 'error',
+					content: 'El usuario con esa cedula existe.'
+				})
+				setLoading(true)
+				break;
+			case undefined:
+				setLoading(false)
+				break;
+		}
+	}
+	const cleanForm = () => {
+		setIdType('')
+		setIdNumber('')
+		setName('')
+		setLastname('')
+		setPassword('')
+		setConfirmPassword('')
+		setUserType('')
+		onCancel()
+	}
+
+	const submitNewUser = async () => {
+		if(idType=='' || idNumber=='' || name=='' || lastname=='' || password == '' || confirmPassword==''){
 			messageApi.open({
 				type: 'error',
-				content: res.response.data
+				content: 'Debe ingresar todos los datos'
 			})
+		}else if(password!=confirmPassword){
+			messageApi.open({
+				type: 'error',
+				content: 'Las contraseñas no son iguales'
+			})
+		}else{
+			setLoading(true)
+			const data = {
+				idType: idType,
+				id: idNumber,
+				name: name,
+				lastname: lastname,
+				password: await encrypt(password),
+				userType: userType
+			}
+
+			const res = await createUser(data)
+			if(res.status == 200){
+				setLoading(false)
+				messageApi.open({
+					type: 'success',
+					content: 'Usuario creado con exito'
+				})
+				updateList()
+				onCancel()
+			}else{
+				setLoading(false)
+				messageApi.open({
+					type: 'error',
+					content: res.response.data
+				})
+			}
 		}
 	}
 
@@ -79,17 +129,17 @@ export const AddNewUserModal = ({open, onCancel, updateList}) => {
 		<Modal
 			title='Agregar nuevo usuario'
 			open={open} 
-			onCancel={onCancel}
+			closable={false}
 			destroyOnClose
 			footer={[
-				<Button disabled={loading} onClick={onCancel} variant='link' color='danger'>Cancelar</Button>,
-				<Button disabled={loading} onClick={submitNewUser} variant='solid' color='primary'>Agregar</Button>
+				<Button onClick={cleanForm} variant='link' color='danger'>Cancelar</Button>,
+				<Button disabled={loading ||idType=='' || idNumber=='' || name=='' || lastname=='' || password == '' || confirmPassword==''} onClick={submitNewUser} variant='solid' color='primary'>Agregar</Button>
 			]}
 		>
 			<div style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
 				<Space.Compact style={{width: '100%'}}>
-					<Select disabled={loading} onChange={(e) => setIdType(e)} placeholder='Tipo de identificacion' style={{width: '50%'}} options={lists.identificationList.slice(0, 2)}/>
-					<InputNumber disabled={loading} onChange={(e) => setIdNumber(e)} placeholder='Numero' style={{width: '50%'}}/>
+					<Select onChange={(e) => setIdType(e)} placeholder='Tipo de identificacion' style={{width: '50%'}} options={lists.identificationList.slice(0, 2)}/>
+					<InputNumber onBlur={(e) => {findUser(Number(e.target.value))}} onChange={(e) => setIdNumber(e)} placeholder='Numero' style={{width: '50%'}}/>
 				</Space.Compact>
 				<Space.Compact style={{width: '100%'}}>
 					<Input disabled={loading} onChange={(e) => setName(e.target.value)} placeholder='Nombre' style={{width: '50%'}}/>
@@ -97,7 +147,8 @@ export const AddNewUserModal = ({open, onCancel, updateList}) => {
 				</Space.Compact>
 				
 				<Input.Password disabled={loading} placeholder='Contraseña' onChange={(e) => setPassword(e.target.value)}/>
-				<Select disabled={loading} onChange={(e) => setUserType(e)} placeholder='Tipo de Usuario' options={lists.userTypeList}/>
+				<Input.Password disabled={loading} placeholder='Confirmar contraseña' onChange={(e) => setConfirmPassword(e.target.value)}/>
+				<Select disabled={loading} onChange={(e) => setUserType(e)} placeholder='Tipo de Usuario' options={lists.userTypeList.slice(0, 4)}/>
 			</div>
 		</Modal>
 	)
@@ -132,8 +183,8 @@ export const DeleteUserModal = ({open, onCancel, id, updateList}) => {
 		<Modal
 			destroyOnClose
 			open={open}
-			onCancel={onCancel}
-			title='Eliminar este usuario?'
+			closable={false}
+			title='¿Desea desactivar este usuario?'
 			footer={[
 				<Button disabled={loading} variant='text' color='primary' onClick={onCancel}>Cancelar</Button>,
 				<Button disabled={loading} variant='solid' color='danger' onClick={handleDelete}>Eliminar</Button>
@@ -147,13 +198,18 @@ export const ReactivateUserModal = ({open, onCancel, updateList, id}) => {
 	const {messageApi} = useContext(appContext)
 	const [loading, setLoading] = useState(false)
 	const [newPassword, setNewPassword] = useState('')
-	console.log(id) 
+	const [confirmPassword, setConfirmPassword] = useState('')
 
 	const submitReactivation = async () => {
 		if(newPassword == ''){
 			messageApi.open({
 				type: 'error',
 				content: 'Ingrese una contraseña'
+			})
+		}else if(newPassword!=confirmPassword){
+			messageApi.open({
+				type: 'error',
+				content: 'Las contraseñas no son iguales'
 			})
 		}else{
 			const data = {
@@ -183,16 +239,21 @@ export const ReactivateUserModal = ({open, onCancel, updateList, id}) => {
 
 	return(
 		<Modal
-			title='Reactivar a este usuario?'
+			title='¿Desea reactivar ha este usuario?'
 			destroyOnClose
 			open={open}
-			onCancel={() => {onCancel(); setNewPassword(false)}}
+			closable={false}
 			footer={[
 				<Button variant='text' color='primary' onClick={() => {onCancel(); setNewPassword(false)}}>Cancelar</Button>,
 				<Button variant='solid' color='primary' onClick={submitReactivation}>Reactivar</Button>
 			]}
 		>
-			<Input.Password placeholder='Contraseña nueva' onChange={(e) => setNewPassword(e.target.value)}/>
+			<Space.Compact style={{width: '100%', margin: '1%'}}>
+				<Input.Password placeholder='Nueva contraseña' onChange={(e) => setNewPassword(e.target.value)}/>
+			</Space.Compact>
+			<Space.Compact style={{width: '100%', margin: '1%'}}>
+				<Input.Password placeholder='Confirmar nueva contraseña' onChange={(e) => setConfirmPassword(e.target.value)}/>
+			</Space.Compact>
 		</Modal>
 	)
 }
@@ -202,34 +263,47 @@ export const ChangePasswordModal = ({open, onCancel, info}) => {
 	const {messageApi} = useContext(appContext)
 	const [loading, setLoading] = useState(false)
 	const [newPassword, setNewPassword] = useState('')
+	const [confirmPassword, setConfirmPassword] = useState('')
 
 	const submitPasswordChange = async () => {
-		const data = {
-			userId: info.id,
-			newPassword: await encrypt(newPassword)
-		}
-		let res = await changePassword(data)
-		if(res.status == 200){
-			messageApi.open({
-				type: 'success',
-				content: 'Contraseña actualizada'
-			})
-			setLoading(false)
-			onCancel()
-		}else{
-			setLoading(false)
+		if(newPassword == ''){
 			messageApi.open({
 				type: 'error',
-				content: res.response.data
+				content: 'Ingrese una contraseña'
 			})
+		}else if(newPassword!=confirmPassword){
+			messageApi.open({
+				type: 'error',
+				content: 'Las contraseñas no son iguales'
+			})
+		}else{
+			const data = {
+				userId: info.id,
+				newPassword: await encrypt(newPassword)
+			}
+			let res = await changePassword(data)
+			if(res.status == 200){
+				messageApi.open({
+					type: 'success',
+					content: 'Contraseña actualizada'
+				})
+				setLoading(false)
+				onCancel()
+			}else{
+				setLoading(false)
+				messageApi.open({
+					type: 'error',
+					content: res.response.data
+				})
+			}
 		}
 	}
 
 	return(
 		<Modal
 			destroyOnClose
+			closable={false}
 			title='Cambiar contraseña del usuario'
-			onCancel={onCancel}
 			open={open}
 			footer={[
 				<Button variant='text' color='danger' onClick={onCancel} disabled={loading}>Cancelar</Button>,
@@ -240,7 +314,12 @@ export const ChangePasswordModal = ({open, onCancel, info}) => {
 				>Aceptar</Button>
 			]}
 		>
-			<Input.Password placeholder='Contraseña nueva' onChange={(e) => setNewPassword(e.target.value)}/>
+			<Space.Compact style={{width: '100%', margin: '1%'}}>
+				<Input.Password placeholder='Nueva contraseña' onChange={(e) => setNewPassword(e.target.value)}/>
+			</Space.Compact>
+			<Space.Compact style={{width: '100%', margin: '1%'}}>
+				<Input.Password placeholder='Confirmar nueva contraseña' onChange={(e) => setConfirmPassword(e.target.value)}/>
+			</Space.Compact>
 		</Modal>
 	)
 }
@@ -277,7 +356,7 @@ export const ChangeUserTypeModal = ({open, onCancel, info}) => {
 		<Modal
 			destroyOnClose
 			title='Cambiar tipo de usuario'
-			onCancel={() => {onCancel(); setSelectedType('')}}
+			closable={false}
 			open={open}
 			footer={[
 				<Button variant='text' color='danger' onClick={() => {onCancel(); setSelectedType('')}} disabled={loading}>Cancelar</Button>,

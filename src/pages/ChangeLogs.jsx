@@ -16,7 +16,6 @@ const ChangeLogs = () => {
 
     async function getList(){
         let res = await getAllChangeLogs()
-        console.log(res)
         setShowList(res.data)
     }
 

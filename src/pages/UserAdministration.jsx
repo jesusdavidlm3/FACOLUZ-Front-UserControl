@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Input, Button, Tooltip } from 'antd'
 import {EditOutlined, UnlockOutlined ,DeleteOutlined } from '@ant-design/icons'
 import { AddNewUserModal as AddNewUser, DeleteUserModal as DeleteUser, ChangePasswordModal as ChangePassword, ChangeUserTypeModal as ChangeUserType } from '../components/Modals'
-import { getAllUsers } from '../client/client'
+import { getAllUsers, getSearchedUsers } from '../client/client'
 import { searchOnList, identificationList, userTypeList } from '../context/lists'
 import { appContext } from '../context/appContext'
 
@@ -28,19 +28,28 @@ const UserAdministration = () => {
 		let res = await getAllUsers()
 		setShowList(res.data)
 	}
+	async function getSearchedUserList(text) {
+		let res
+		if (text==""){
+			res = await getAllUsers()
+		}else{
+			res = await getSearchedUsers(text)
+		}
+		setShowList(res.data)
+	}
 
 	return(
 		<div className='UserAdministration'>
 			{contextHolder}
 			<div className='searchBar' >
-				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' />
+				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' onChange={(a) => {getSearchedUserList(a.target.value)}}/>
 				<Button variant='solid' color='primary' onClick={() => setNewUserModal(true)}>Agregar usuario</Button>
 			</div>
 			<div className='listContainer' >
 				{ showList.map(item => (
 					<div className='listItem' key={item.id}>
 						<div className='info'>
-							<h4>{searchOnList(identificationList, item.identificationType)}-{item.identification} {item.name} {item.lastname} - {searchOnList(userTypeList, item.type)} </h4>
+							<h4>{searchOnList(identificationList, item.identificationType)}-{item.id} {item.name} {item.lastname} - {searchOnList(userTypeList, item.type)} </h4>
 						</div>
 						<div className='buttons'>
 							<Tooltip onClick={() => {setSelectedItem(item); setChangePasswordModal(true)}} title='Cambiar contraseña'><Button shape='circle' variant='solid' color='primary' size='large' icon={<UnlockOutlined />} /></Tooltip>

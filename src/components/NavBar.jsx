@@ -13,17 +13,19 @@ const NavBar = () => {
 	const {userData} = useContext(appContext)
 	const {setView} = useContext(routerContext)
 
+	const {view} = useContext(routerContext) 
+
 	return(
 		<div className='NavBar'>
 			<div className='info'>
 				<h1>Bienvenido {userData.name} {userData.lastname} </h1>
 			</div>
 			<div className='buttons'>
-				{ location.pathname != '/home' && (
+				{ view != 'Home' && (
 					<Tooltip title='Volver'>
 						<Button
 							shape='circle'
-							// onClick={() => navigate(-1)}
+							onClick={() => setView('Home')}
 							variant='solid'
 							icon={<LeftOutlined />}
 							size='large' 

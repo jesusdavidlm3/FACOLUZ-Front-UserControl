@@ -15,8 +15,19 @@ export async function getAllUsers() {
 	return await http.get('api/getAllUsers', token, null)
 }
 
+export async function getSearchedUsers(text){
+	return await http.get('api/getSearchedUsers', token, text)
+}
+
+export async function getSearchedSDeactivatedUsers(text){
+	return await http.get('api/getSearchedSDeactivatedUsers', token, text)
+}
+
 export async function getDeactivatedUsers() {
 	return await http.get('api/getDeactivatedUsers', token, null)
+}
+export async function getIdUsers(id) {
+	return await http.get('api/getIdUsers', token, id)
 }
 
 export async function createUser(data) {
