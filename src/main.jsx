@@ -6,7 +6,7 @@ import RouterContextProvider from './context/RouterContextProvider'
 import App from './App'
 
 createRoot(document.getElementById('root')).render(
-  <ConfigProvider theme={{algorithm: theme.darkAlgorithm}}>
+  <ConfigProvider theme={{algorithm: theme.lightAlgorithm}}>
     <RouterContextProvider>
       <App />
     </RouterContextProvider>
