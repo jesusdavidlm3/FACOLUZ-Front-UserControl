@@ -2,7 +2,7 @@ import React from 'react'
 
 const Home = () => {
 	return(
-		<div className='Home'>
+		<div className='Home page'>
 			<h1>Bienvenido al modulo de administracion</h1>
 			<h3>
 				En este modulo podra gestionar su su usuario y el de otros, tambien podra

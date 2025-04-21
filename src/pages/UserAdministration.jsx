@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Input, Button, Tooltip } from 'antd'
+import { Input, Button, Tooltip, List } from 'antd'
 import {EditOutlined, UnlockOutlined ,DeleteOutlined } from '@ant-design/icons'
 import { AddNewUserModal as AddNewUser, DeleteUserModal as DeleteUser, ChangePasswordModal as ChangePassword, ChangeUserTypeModal as ChangeUserType } from '../components/Modals'
 import { getAllUsers, getSearchedUsers } from '../client/client'
@@ -39,25 +39,27 @@ const UserAdministration = () => {
 	}
 
 	return(
-		<div className='UserAdministration'>
+		<div className='UserAdministration Page'>
 			{contextHolder}
 			<div className='searchBar' >
 				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' onChange={(a) => {getSearchedUserList(a.target.value)}}/>
 				<Button variant='solid' color='primary' onClick={() => setNewUserModal(true)}>Agregar usuario</Button>
 			</div>
 			<div className='listContainer' >
-				{ showList.map(item => (
-					<div className='listItem' key={item.id}>
-						<div className='info'>
-							<h4>{searchOnList(identificationList, item.identificationType)}-{item.id} {item.name} {item.lastname} - {searchOnList(userTypeList, item.type)} </h4>
-						</div>
-						<div className='buttons'>
-							<Tooltip onClick={() => {setSelectedItem(item); setChangePasswordModal(true)}} title='Cambiar contraseña'><Button shape='circle' variant='solid' color='primary' size='large' icon={<UnlockOutlined />} /></Tooltip>
-							<Tooltip onClick={() => {setSelectedItem(item); setChangeTypeModal(true)}} title='Cambiar tipo'><Button shape='circle' variant='solid' color='primary' size='large' icon={<EditOutlined />} /></Tooltip>
-							<Tooltip onClick={() => {setSelectedItem(item); setDeleteUserModal(true)}} title='Eliminar'><Button shape='circle' variant='solid' color='danger' size='large' icon={<DeleteOutlined />} /></Tooltip>
-						</div>
-					</div>
-				)) }
+				<List bordered className='mainList'>
+					{ showList.map(item => (
+						<List.Item className='listItem' key={item.id}>
+							<div className='info'>
+								<h4>{searchOnList(identificationList, item.identificationType)}-{item.id} {item.name} {item.lastname} - {searchOnList(userTypeList, item.type)} </h4>
+							</div>
+							<div className='buttons'>
+								<Tooltip onClick={() => {setSelectedItem(item); setChangePasswordModal(true)}} title='Cambiar contraseña'><Button shape='circle' variant='solid' color='primary' size='large' icon={<UnlockOutlined />} /></Tooltip>
+								<Tooltip onClick={() => {setSelectedItem(item); setChangeTypeModal(true)}} title='Cambiar tipo'><Button shape='circle' variant='solid' color='primary' size='large' icon={<EditOutlined />} /></Tooltip>
+								<Tooltip onClick={() => {setSelectedItem(item); setDeleteUserModal(true)}} title='Eliminar'><Button shape='circle' variant='solid' color='danger' size='large' icon={<DeleteOutlined />} /></Tooltip>
+							</div>
+						</List.Item>
+					)) }
+				</List>
 			</div>
 
 			<AddNewUser

@@ -8,15 +8,28 @@
 	--listItemColor: #022C53;
 	--moduleRadius: 15px;
 	--modulepPadding: 20px;
+}
 
+@mixin pageBasis{
+	background-color: white;
+	margin: 20px;
+	padding: 20px;
+	width: calc(93vw - 40px);
+	height: calc(100vh - 80px);
+	border-radius: var(--moduleRadius);
+	align-self: center;
+	justify-self: center;
+	align-items: center;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .Root{
 	display: flex;
 	flex-direction: row;
-
-
+	align-items: center;
 }
+
 body{
 	margin: 0px;
 	background-color: var(--bgColor);
@@ -25,17 +38,50 @@ body{
 	width: 100vw;
 	height: 100vh;
 }
+
 .LatPanel{
 	background-color: var(--moduleColor);	
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 20vw;
-	height: 100vh;
+	width: calc(7vw - 40px);
+	height: calc(100vh - 40px);
 	padding: 0 10px;	
-	background-color: cadetblue;
+	margin: 20px 0px 20px 20px;
+	border-radius: var(--moduleRadius);
+	transition: all ease .25s;
 
-	
+	&:hover{
+		width: calc(18vw - 40px);
+		height: calc(100vh - 40px);
+	}
+
+	&:hover .invisible{
+		display: block;
+	}
+
+	.invisible{
+		display: none;
+		transition: all ease .25s;
+	}
+
+	&:hover .Button{
+		width: 90%;
+	}
+
+	&:hover .Page{
+		width: calc(82vw - 40px);
+	}
+
+	&:hover .luzLogo{
+		transform: scale(.6);
+	}
+
+	&:hover .facoLogo{
+		transform: scale(.8);
+		top: 0;
+	}
+
 	Button{
 		background-color: #d9d9d9;
 		color: black;
@@ -43,12 +89,10 @@ body{
 		margin: 1vh;
 		width: 90%;
 		justify-content: left;
+		width: 50px;
+		transition: all ease .25s;
 	}
 	
-	// img{
-	// 	width: 200px;
-	// 	align-self: center
-	// }
 	
 	.info{
 		display: flex;
@@ -59,7 +103,8 @@ body{
 		height: calc(15% - ((15px / 2)/2));
 
 		.luzLogo{
-			width: 30%;
+			width: 80%;
+			transition: all ease .25s;
 		}
 
 		h1{
@@ -75,7 +120,10 @@ body{
 	}
 
 	.facoLogo{
-		height: calc(15% - ((15px / 2)/2));
+		width: 120%;
+		transition: all ease .25s;
+		position: relative;
+		top: 10%;
 	}
 }
 
@@ -123,13 +171,15 @@ body{
 	justify-content: center;
 	width: 100vw;
 	height: 100vh;
+	background-color: white;
 
 	.loginForm{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		background-color: var(--moduleColor);
+		background-color: var(--bgColor);
+		color: white;
 		border-radius: var(--moduleRadius);
 		padding: var(--modulepPadding);
 		width: 35vw;
@@ -140,14 +190,15 @@ body{
 	}
 }
 .Home{
-	padding: 20px;
-	height: calc(100% - 40px);
-	width: calc(100% - 40px);
+	// padding: 20px;
+	// height: calc(100% - 40px);
+	// width: calc(100% - 40px);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	@include pageBasis;
 
 	h3{
 		width: 40%;
@@ -160,12 +211,10 @@ body{
 }
 
 .UserAdministration{
-	padding: 20px;
-	height: calc(100% - 40px);
-	width: calc(100% - 40px);
+	@include pageBasis;
 
 	.searchBar{
-		background-color: var(--moduleColor);
+		// background-color: var(--moduleColor);
 		border-radius: var(--moduleRadius);
 		padding: var(--modulepPadding);
 		display: flex;
@@ -174,7 +223,7 @@ body{
 	}
 
 	.listContainer{
-		background-color: var(--moduleColor);
+		// background-color: var(--moduleColor);
 		padding: var(--modulepPadding);
 		display: flex;
 		flex-direction: column;
@@ -182,38 +231,36 @@ body{
 		gap: 10px;
 		margin: 10px;
 		border-radius: var(--moduleRadius);
+		width: 95%;
 
-		.listItem{
-			background-color: var(--listItemColor);
+		.mainList{
+			width: 100%;
 			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			width: 90%;
-			border-radius: var(--moduleRadius);
-			padding: 10px 20px;
+			flex-direction: column;
 
-			.buttons{
+			.listItem{
+				// background-color: var(--listItemColor);
 				display: flex;
-				gap: 10px;
+				align-items: center;
+				justify-content: space-between;
+				align-self: center;
+				// width: 90%;
+				// border-radius: var(--moduleRadius);
+				// padding: 10px 20px;
+
+				.buttons{
+					display: flex;
+					gap: 10px;
+				}
 			}
 		}
 	}
 }
 
 .ChangeLogs{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: var(--moduleColor);
-	margin: 20px;
-	height: calc(100% - 40px);
-	width: calc(100% - 40px);
-	border-radius: var(--moduleRadius);
+	@include pageBasis;
 
 	.logItem{
-		background-color: var(--listItemColor);
-		margin: 5px;
-		padding: 0px 10px;
-		border-radius: var(--moduleRadius);
+		height: 50px;
 	}
 }
