@@ -26,7 +26,11 @@ const ChangeLogs = () => {
             <List bordered>
                 {showList.map(item => (
                     <List.Item className='logItem'>
-                        <h3>{item.modificatorName} {item.modificatorLastname} {searchOnList(lists.changeLogsActionType, item.changeType)} {item.modificatedName} {item.modificatedLastname} el {item.dateTime}</h3>
+                        <h3>{item.modificatorName} {item.modificatorLastname}
+                            {searchOnList(lists.changeLogsActionType, item.changeType)}
+                            {item.modificatedName} {item.modificatedLastname} el
+                            {new Date(item.dateTime).getUTCDate()} a las {new Date(item.dateTime).getTime()}
+                        </h3>
                     </List.Item>
                 ))}
             </List>

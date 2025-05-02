@@ -49,7 +49,7 @@ body{
 	padding: 0 10px;	
 	margin: 20px 0px 20px 20px;
 	border-radius: var(--moduleRadius);
-	transition: all ease .25s;
+	transition: all ease .4s;
 
 	&:hover{
 		width: calc(18vw - 40px);
@@ -62,7 +62,7 @@ body{
 
 	.invisible{
 		display: none;
-		transition: all ease .25s;
+		transition: all ease .4s;
 	}
 
 	&:hover .Button{
@@ -90,7 +90,7 @@ body{
 		width: 90%;
 		justify-content: left;
 		width: 50px;
-		transition: all ease .25s;
+		transition: all ease .4s;
 	}
 	
 	
@@ -104,7 +104,7 @@ body{
 
 		.luzLogo{
 			width: 80%;
-			transition: all ease .25s;
+			transition: all ease .4s;
 		}
 
 		h1{
@@ -121,7 +121,7 @@ body{
 
 	.facoLogo{
 		width: 120%;
-		transition: all ease .25s;
+		transition: all ease .4s;
 		position: relative;
 		top: 10%;
 	}
@@ -145,22 +145,6 @@ body{
 			transform: scale(1.1);
 			text-shadow: var(--shadow);
 		}
-	}
-}
-
-.NavBar{
-	background-color: var(--moduleColor);
-	margin: 0px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0px 20px;
-	width: calc(100vw - 40px);
-
-	.buttons{
-		display: flex;
-		gap: 10px;
 	}
 }
 
@@ -189,6 +173,7 @@ body{
 		h1{margin: 10px}
 	}
 }
+
 .Home{
 	// padding: 20px;
 	// height: calc(100% - 40px);

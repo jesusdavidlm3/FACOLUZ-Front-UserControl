@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { routerContext } from './context/routerContext';
 import Router from './components/Router';
-import NavBar from './components/NavBar';
 import ContextProvider from './context/ContextProvider'
 import LatPanel from './components/LatPanel';
 

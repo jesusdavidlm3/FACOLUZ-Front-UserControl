@@ -86,9 +86,9 @@ export const userTypeList = [
 ]
 
 export const changeLogsActionType = [
-    {label: 'Crear usuario', value: 0},
-    {label: 'Desactivar usuario', value: 1},
-    {label: 'Reactivar usuario', value: 2},
-    {label: 'Cambiar contraseña', value: 3},
-    {label: 'Cambiar tipo de usuario', value: 4}
+    {label: 'creo un usuario a', value: 0},
+    {label: 'desactivo el usuario de', value: 1},
+    {label: 'reactivo el usuario de', value: 2},
+    {label: 'cambio la contrasena de', value: 3},
+    {label: 'cambio el tipo de usuario de', value: 4}
 ]
