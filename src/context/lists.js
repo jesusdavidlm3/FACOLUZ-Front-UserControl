@@ -83,6 +83,7 @@ export const userTypeList = [
     {label: 'Docente', value: 1},
     {label: 'Estudiante', value: 2},
     {label: 'Administrador de estudios', value: 3},
+    {label: 'Recepcionista', value: 4},
 ]
 
 export const changeLogsActionType = [
