@@ -2,7 +2,7 @@
 
 :root{
 	--bgColor: #660099;
-	--moduleColor: #ffffff;
+	--moduleColor: #dadae8;
 	--bgColorLogin: #ffffff;
 	--moduleColorLogin: #660099;
 	--listItemColor: #022C53;
@@ -11,7 +11,7 @@
 }
 
 @mixin pageBasis{
-	background-color: white;
+	background-color: var(--moduleColor);
 	margin: 20px;
 	padding: 20px;
 	width: calc(93vw - 40px);
@@ -40,7 +40,7 @@ body{
 }
 
 .LatPanel{
-	background-color: var(--moduleColor);	
+	background-color: #ffffff;	
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -74,12 +74,17 @@ body{
 	}
 
 	&:hover .luzLogo{
-		transform: scale(.6);
+		transform: scale(.3);
 	}
 
 	&:hover .facoLogo{
 		transform: scale(.8);
 		top: 0;
+	}
+
+	&:hover .info{
+		position: relative;
+		right: 5%;
 	}
 
 	Button{
@@ -105,10 +110,13 @@ body{
 		.luzLogo{
 			width: 80%;
 			transition: all ease .4s;
+
 		}
 
 		h1{
 			font-size: 20px;
+			position: relative;
+			right: 25%;
 		}
 	}
 	
@@ -155,27 +163,44 @@ body{
 	justify-content: center;
 	width: 100vw;
 	height: 100vh;
-	background-color: white;
+	// background-color: white;
+	background-image: url(./assets/fondo.png);
+	background-size: cover;
 
 	.loginForm{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: start;
 		background-color: var(--bgColor);
 		color: white;
 		border-radius: var(--moduleRadius);
 		padding: var(--modulepPadding);
 		width: 35vw;
-		height: 50vh;
+		height: 55vh;
 
-		h2{margin: 10px;}
-		h1{margin: 10px}
+		h2{margin: 0 10px 10px 10px;}
+		h1{margin: 0 10px 20px 10px}
+
+		.logos{
+			display: flex;
+			align-items: center;
+			gap: 35px;
+
+			img{width: 90px;}
+
+			.logofaco{
+				background-color: white;
+				width: 150px;
+				border-radius: 5px;
+			}
+		}
 	}
 }
 
-.Home{
+.HomePage{
 	background-image: url(./assets/fondo.png);
+	background-size: cover;
 	// padding: 20px;
 	// height: calc(100% - 40px);
 	// width: calc(100% - 40px);
@@ -185,6 +210,17 @@ body{
 	justify-content: center;
 	text-align: center;
 	@include pageBasis;
+	color: white;
+	padding: 20px 0;
+	scrollbar-width: none;
+
+	.BackgroundPage{
+		background-color: var(--bgColor);
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
 	h3{
 		width: 40%;
@@ -194,9 +230,32 @@ body{
 		font-size: 50px;
 		margin: 0px
 	}
+
+	h4{
+		color: black;
+		position: absolute;
+		bottom: 1vh;
+	}
 }
 
+.BackGround{
+	background-color: var(--bgColor);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	h3{
+		width: 40%;
+	}
+
+	h1{
+		font-size: 50px;
+		margin: 0px
+	}
+}
 .UserAdministration{
+	scrollbar-width: none;
 	@include pageBasis;
 
 	.searchBar{
@@ -220,6 +279,7 @@ body{
 		width: 95%;
 
 		.mainList{
+			background-color: white;
 			width: 100%;
 			display: flex;
 			flex-direction: column;

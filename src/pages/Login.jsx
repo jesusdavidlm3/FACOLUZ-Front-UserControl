@@ -6,7 +6,8 @@ import { login } from '../client/client'
 import { LoadingOutlined } from '@ant-design/icons'
 import React from 'react'
 import { routerContext } from '../context/routerContext'
-
+import logofaco from '../assets/Logo_FacoLuz.png'
+import logoluz from '../assets/Logo_LUZ.png'
 
 const Login = () => {
 
@@ -45,6 +46,10 @@ const Login = () => {
 		<div className='Login'>
 			{contextHolder}
 			<Form disabled={loading} className='loginForm' onFinish={submitLogin}>
+				<div className='logos'>
+					<img src={logoluz} className='logoluz'/>
+					<img src={logofaco} className='logofaco'/>
+				</div>
 				<h1>Modulo administrativo</h1>
 				<h2>Iniciar sesion</h2>
 				<Form.Item name='identification'>
@@ -54,7 +59,7 @@ const Login = () => {
 					<Input.Password placeholder='Contraseña'disabled={loading} style={{width: '100%'}}/>
 				</Form.Item>
 
-				<Button htmlType='submit' type='primary' disabled={loading} > {loading ? (<>{<LoadingOutlined />}Cargando...</>):('Iniciar sesion')} </Button>
+				<Button htmlType='submit' disabled={loading} color='default' > {loading ? (<>{<LoadingOutlined />}Cargando...</>):(<h4>Iniciar sesion</h4>)} </Button>
 			</Form>
 		</div>
 	)

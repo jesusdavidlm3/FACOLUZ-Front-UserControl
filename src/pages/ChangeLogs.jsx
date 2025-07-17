@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react'
 import { searchOnList } from '../context/lists'
 import * as lists from '../context/lists'
 import React from 'react'
-import { List } from 'antd'
+import { Divider, List } from 'antd'
+import { getTime, getDate } from '../functions/formatDates'
 
 
 const ChangeLogs = () => {
@@ -21,19 +22,21 @@ const ChangeLogs = () => {
     }
 
     return(
-        <div className="ChangeLogs Page">
-            <h1>Registro de cambios</h1>
-            <List bordered>
-                {showList.map(item => (
-                    <List.Item className='logItem'>
-                        <h3>{item.modificatorName} {item.modificatorLastname}
-                            {searchOnList(lists.changeLogsActionType, item.changeType)}
-                            {item.modificatedName} {item.modificatedLastname} el
-                            {new Date(item.dateTime).getUTCDate()} a las {new Date(item.dateTime).getTime()}
-                        </h3>
-                    </List.Item>
-                ))}
-            </List>
+        <div className="UserAdministration Page">
+            <Divider><h1>Registro de cambios</h1></Divider>
+            <div className='listContainer'>
+                <List bordered className='mainList'>
+                    {showList.map(item => (
+                        <List.Item className='logItem'>
+                            <h3>{item.modificatorName} {item.modificatorLastname}{" "}
+                                {searchOnList(lists.changeLogsActionType, item.changeType)}{" "}
+                                {item.modificatedName} {item.modificatedLastname} el{" "}
+                                {getDate(item.dateTime)} a las {getTime(item.dateTime)}
+                            </h3>
+                        </List.Item>
+                    ))}
+                </List>
+            </div>
         </div>
     )
 }

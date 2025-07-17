@@ -5,5 +5,5 @@ export function getDate(fulldate){
 
 export function getTime(fulldate){
     let date = new Date(fulldate)
-    return `${date.getHours}/${date.getFullYear()}`
+    return `${date.getHours() > 12 ? (date.getHours()-12):(date.getHours())}:${date.getMinutes()} ${date.getHours() > 12 ? ("p.m."):("a.m.")}`
 }

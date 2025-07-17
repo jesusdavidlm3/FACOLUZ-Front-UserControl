@@ -50,7 +50,7 @@ const UserAdministration = () => {
 					{ showList.map(item => (
 						<List.Item className='listItem' key={item.id}>
 							<div className='info'>
-								<h4>{searchOnList(identificationList, item.identificationType)}-{item.id} {item.name} {item.lastname} - {searchOnList(userTypeList, item.type)} </h4>
+								<h3>{searchOnList(identificationList, item.identificationType)}-{item.id} {item.name} {item.lastname} - {searchOnList(userTypeList, item.type)} </h3>
 							</div>
 							<div className='buttons'>
 								<Tooltip onClick={() => {setSelectedItem(item); setChangePasswordModal(true)}} title='Cambiar contraseña'><Button shape='circle' variant='solid' color='primary' size='large' icon={<UnlockOutlined />} /></Tooltip>
