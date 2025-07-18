@@ -53,9 +53,15 @@ const Login = () => {
 				<h1>Modulo administrativo</h1>
 				<h2>Iniciar sesion</h2>
 				<Form.Item name='identification'>
+<<<<<<< Updated upstream
 					<InputNumber placeholder='Identificacion' disabled={loading} controls={false} />
 				</Form.Item>
 				<Form.Item name='password'>
+=======
+					<InputNumber placeholder='Identificacion' disabled={loading}  />
+				</Form.Item>
+				<Form.Item name='password' >
+>>>>>>> Stashed changes
 					<Input.Password placeholder='Contraseña'disabled={loading} />
 				</Form.Item>
 

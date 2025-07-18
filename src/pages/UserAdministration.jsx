@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Input, Button, Tooltip, List } from 'antd'
+import { Input, Button, Tooltip, List, Divider } from 'antd'
 import {EditOutlined, UnlockOutlined ,DeleteOutlined } from '@ant-design/icons'
 import { AddNewUserModal as AddNewUser, DeleteUserModal as DeleteUser, ChangePasswordModal as ChangePassword, ChangeUserTypeModal as ChangeUserType } from '../components/Modals'
 import { getAllUsers, getSearchedUsers } from '../client/client'
@@ -40,6 +40,7 @@ const UserAdministration = () => {
 
 	return(
 		<div className='UserAdministration Page'>
+			<Divider><h1>Administracion de usuarios</h1></Divider>
 			{contextHolder}
 			<div className='searchBar' >
 				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' onChange={(a) => {getSearchedUserList(a.target.value)}}/>
