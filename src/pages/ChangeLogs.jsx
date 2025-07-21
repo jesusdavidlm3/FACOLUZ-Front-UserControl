@@ -25,14 +25,14 @@ const ChangeLogs = () => {
         <div className="UserAdministration Page">
             <Divider><h1>Registro de cambios</h1></Divider>
             <div className='listContainer'>
-                <List bordered className='mainList'>
+                <List bordered className='shortList'>
                     {showList.map(item => (
                         <List.Item className='logItem'>
-                            <h3>{item.modificatorName} {item.modificatorLastname}{" "}
+                            <h2>{item.modificatorName} {item.modificatorLastname}{" "}
                                 {searchOnList(lists.changeLogsActionType, item.changeType)}{" "}
                                 {item.modificatedName} {item.modificatedLastname} el{" "}
                                 {getDate(item.dateTime)} a las {getTime(item.dateTime)}
-                            </h3>
+                            </h2>
                         </List.Item>
                     ))}
                 </List>

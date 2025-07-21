@@ -53,7 +53,7 @@ const Login = () => {
 				<h1>Modulo administrativo</h1>
 				<h2>Iniciar sesion</h2>
 				<Form.Item name='identification'>
-					<InputNumber placeholder='Identificacion' disabled={loading} controls={false} />
+					<Input placeholder='Identificacion' disabled={loading} />
 				</Form.Item>
 				<Form.Item name='password'>
 					<Input.Password placeholder='Contraseña'disabled={loading} />
