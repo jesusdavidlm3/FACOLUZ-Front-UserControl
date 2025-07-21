@@ -14,6 +14,8 @@
 	background-color: var(--moduleColor);
 	margin: 20px;
 	padding: 20px;
+	display: flex;
+	flex-direction: column;
 	width: calc(93vw - 40px);
 	height: calc(100vh - 80px);
 	border-radius: var(--moduleRadius);
@@ -265,6 +267,7 @@ body{
 		display: flex;
 		align-items: center;
 		gap: 15px;
+		width: 95%;
 	}
 
 	.listContainer{
