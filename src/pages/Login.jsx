@@ -56,11 +56,6 @@ const Login = () => {
 					<Input placeholder='Identificacion' disabled={loading} />
 				</Form.Item>
 				<Form.Item name='password'>
-=======
-					<InputNumber placeholder='Identificacion' disabled={loading}  />
-				</Form.Item>
-				<Form.Item name='password' >
->>>>>>> Stashed changes
 					<Input.Password placeholder='Contraseña'disabled={loading} />
 				</Form.Item>
 

@@ -1,8 +1,8 @@
 {
-  "name": "facoluz-front-adminsoftware",
-  "productName": "facoluz-front-adminsoftware",
+  "name": "Control de usuarios FACOLUZ",
+  "productName": "Control de usuarios FACOLUZ",
   "version": "1.0.0",
-  "description": "FACOLUZ-Front-AdminSoftware",
+  "description": "Modulo de control de usuarios del sistema de gestion de clinicas FACOLUZ",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
