@@ -11,6 +11,7 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
     "compile32": "npm run make -- --platform win32 --arch ia32",
+    "compile64": "npm run make -- --platform win32 --arch x64",
     "compiledeb": "npm run make -- --platform linux"
   },
   "devDependencies": {
