@@ -1,5 +1,5 @@
 import React,{ useContext, useEffect, useState } from 'react'
-import { Input, Button, Tooltip, List } from 'antd'
+import { Input, Button, Tooltip, List, Divider } from 'antd'
 import {ApiOutlined } from '@ant-design/icons'
 import { getAllUsers, getSearchedSDeactivatedUsers,getDeactivatedUsers } from '../client/client'
 import { searchOnList, identificationList, userTypeList } from '../context/lists'
@@ -39,6 +39,7 @@ const UserReactivation = () => {
 
 	return(
 		<div className='UserAdministration Page'>
+			<Divider><h1>Usuarios inactivos</h1></Divider>
 			{contextHolder}
 			<div className='searchBar' >
 				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' onChange={(a) => {getSearchedUserList(a.target.value)}}/>

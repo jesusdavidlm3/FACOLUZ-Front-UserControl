@@ -29,6 +29,12 @@ const createWindow = () => {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+<<<<<<< HEAD
+=======
+
+  mainWindow.maximize()
+  mainWindow.menuBarVisible(false)
+>>>>>>> 97988f8253684d886f57545aeae5d6ded6c03fb3
 };
 
 ipcMain.handle('get_Backend_Address', () => {

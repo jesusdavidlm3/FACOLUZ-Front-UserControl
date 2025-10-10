@@ -53,10 +53,10 @@ const Login = () => {
 				<h1>Modulo administrativo</h1>
 				<h2>Iniciar sesion</h2>
 				<Form.Item name='identification'>
-					<InputNumber placeholder='Identificacion' disabled={loading} style={{width: '100%'}} />
+					<Input placeholder='Identificacion' disabled={loading} />
 				</Form.Item>
 				<Form.Item name='password'>
-					<Input.Password placeholder='Contraseña'disabled={loading} style={{width: '100%'}}/>
+					<Input.Password placeholder='Contraseña'disabled={loading} />
 				</Form.Item>
 
 				<Button htmlType='submit' disabled={loading} color='default' > {loading ? (<>{<LoadingOutlined />}Cargando...</>):(<h4>Iniciar sesion</h4>)} </Button>

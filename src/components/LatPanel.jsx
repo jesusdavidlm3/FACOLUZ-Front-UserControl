@@ -30,7 +30,7 @@ const LatPanel = () => {
 
             <img src={Logo_Facoluz} draggable={false} className='facoLogo'/>
 
-            <LogoutModal open={confirmLogout} ocCancel={()=>setConfirmLogout(false)} /> 
+            <LogoutModal open={confirmLogout} onCancel={()=>setConfirmLogout(false)} /> 
         </div>
     )
 }
