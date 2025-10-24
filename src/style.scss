@@ -295,16 +295,14 @@ body{
 			display: flex;
 			flex-direction: column;
 
-			.logItem{
-				margin: 0 0 0 10px;
-			}
-
 			.listItem{
 				// background-color: var(--listItemColor);
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 				align-self: center;
+				margin: 0;
+				padding: 0 15px 0 15px;
 				// width: 90%;
 				// border-radius: var(--moduleRadius);
 				// padding: 10px 20px;
@@ -320,8 +318,4 @@ body{
 
 .ChangeLogs{
 	@include pageBasis;
-
-	.logItem{
-		height: 50px;
-	}
 }

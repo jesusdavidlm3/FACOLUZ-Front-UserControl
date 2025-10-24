@@ -47,7 +47,7 @@ const UserAdministration = () => {
 				<Button variant='solid' color='primary' onClick={() => setNewUserModal(true)}>Agregar usuario</Button>
 			</div>
 			<div className='listContainer' >
-				<List bordered className='mainList'>
+				<List bordered className='mainList' size='small'>
 					{ showList.map(item => (
 						<List.Item className='listItem' key={item.id}>
 							<div className='info'>
