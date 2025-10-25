@@ -11,20 +11,20 @@ export async function login(data){
 	return res
 }
 
-export async function getAllUsers() {
-	return await http.get('api/getAllUsers', token, null)
+export async function getAllUsers(page) {
+	return await http.get(`api/getAllUsers/${page}`, token, null)
 }
 
-export async function getSearchedUsers(text){
-	return await http.get('api/getSearchedUsers', token, text)
+export async function getSearchedUsers(text, page){
+	return await http.get(`api/getSearchedUsers/${text}/${page}`, token, null)
 }
 
-export async function getSearchedSDeactivatedUsers(text){
-	return await http.get('api/getSearchedSDeactivatedUsers', token, text)
+export async function getSearchedSDeactivatedUsers(text, page){
+	return await http.get(`api/getSearchedSDeactivatedUsers/${text}/${page}`, token, null)
 }
 
-export async function getDeactivatedUsers() {
-	return await http.get('api/getDeactivatedUsers', token, null)
+export async function getDeactivatedUsers(page) {
+	return await http.get(`api/getDeactivatedUsers/${page}`, token, null)
 }
 export async function getIdUsers(id) {
 	return await http.get('api/getIdUsers', token, id)
@@ -50,6 +50,6 @@ export async function changeUserType(data) {
 	return await http.patch('api/changeUserType', token, data)
 }
 
-export async function getAllChangeLogs() {
-	return await http.get('api/getAllChangeLogs', token, null)
+export async function getAllChangeLogs(page) {
+	return await http.get(`api/getAllChangeLogs/${page}`, token, null)
 }

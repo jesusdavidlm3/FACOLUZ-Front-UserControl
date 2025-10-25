@@ -5,19 +5,19 @@ import * as lists from '../context/lists'
 import React from 'react'
 import { Divider, List } from 'antd'
 import { getTime, getDate } from '../functions/formatDates'
-
+import Pagination from "../components/Pagination"
 
 const ChangeLogs = () => {
 
     const [showList, setShowList] = useState([])
+    const [page, setPage] = useState(1)
 
     useEffect(() => {
-        getList()
-        console.log('ejecute efecto')
-    }, [])
+        getList(page)
+    }, [page])
 
-    async function getList(){
-        let res = await getAllChangeLogs()
+    async function getList(page){
+        let res = await getAllChangeLogs(page)
         setShowList(res.data)
     }
 
@@ -37,6 +37,7 @@ const ChangeLogs = () => {
                     ))}
                 </List>
             </div>
+            <Pagination page={page} setPage={setPage}/>
         </div>
     )
 }

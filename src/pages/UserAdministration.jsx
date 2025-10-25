@@ -5,6 +5,7 @@ import { AddNewUserModal as AddNewUser, DeleteUserModal as DeleteUser, ChangePas
 import { getAllUsers, getSearchedUsers } from '../client/client'
 import { searchOnList, identificationList, userTypeList } from '../context/lists'
 import { appContext } from '../context/appContext'
+import Pagination from '../components/Pagination'
 
 const UserAdministration = () => {
 	const {contextHolder} = useContext(appContext)
@@ -12,6 +13,7 @@ const UserAdministration = () => {
 	//Control de la UI
 	const [showList, setShowList] = useState([])
 	const [selectedItem, setSelectedItem] = useState('')
+	const [page, setPage] = useState(1)
 
 	//Control de modals
 	const [addNewUserModal, setNewUserModal] = useState(false)
@@ -21,19 +23,16 @@ const UserAdministration = () => {
 
 	//Funciones
 	useEffect(() => {
-		getUserList()
-	}, [])
+		getContent()
+	}, [page])
 
-	async function getUserList() {
-		let res = await getAllUsers()
-		setShowList(res.data)
-	}
-	async function getSearchedUserList(text) {
+	async function getContent(){
+		const searchInput = document.getElementById("searchInput").value
 		let res
-		if (text==""){
-			res = await getAllUsers()
+		if(searchInput == ""){
+			res = await getAllUsers(page)
 		}else{
-			res = await getSearchedUsers(text)
+			res = await getSearchedUsers(searchInput, page)
 		}
 		setShowList(res.data)
 	}
@@ -43,7 +42,7 @@ const UserAdministration = () => {
 			<Divider><h1>Administracion de usuarios</h1></Divider>
 			{contextHolder}
 			<div className='searchBar' >
-				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' onChange={(a) => {getSearchedUserList(a.target.value)}}/>
+				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' id='searchInput' onChange={() => getContent()}/>
 				<Button variant='solid' color='primary' onClick={() => setNewUserModal(true)}>Agregar usuario</Button>
 			</div>
 			<div className='listContainer' >
@@ -63,16 +62,18 @@ const UserAdministration = () => {
 				</List>
 			</div>
 
+			<Pagination page={page} setPage={setPage}/>
+
 			<AddNewUser
 				open={addNewUserModal}
 				onCancel={() => setNewUserModal(false)}
-				updateList={() => getUserList()}
+				updateList={() => getContent()}
 			/>
 
 			<DeleteUser
 				open={deleteUserModal}
 				onCancel={() => setDeleteUserModal(false)}
-				updateList={() => getUserList()}
+				updateList={() => getContent()}
 				id={selectedItem.id}
 			/>
 

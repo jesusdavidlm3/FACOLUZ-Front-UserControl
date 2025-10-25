@@ -5,6 +5,7 @@ import { getAllUsers, getSearchedSDeactivatedUsers,getDeactivatedUsers } from '.
 import { searchOnList, identificationList, userTypeList } from '../context/lists'
 import { ReactivateUserModal as ReactivateUser } from '../components/Modals'
 import { appContext } from '../context/appContext'
+import Pagination from "../components/Pagination"
 
 const UserReactivation = () => {
 	const {contextHolder} = useContext(appContext)
@@ -12,37 +13,33 @@ const UserReactivation = () => {
 	//Control de la UI
 	const [showList, setShowList] = useState([])
 	const [selectedItem, setSelectedItem] = useState('')
+	const [page, setPage] = useState(1)
 
 	//Control de modals
     const [reactivateModal, setReactivateModal] = useState(false)
 
 	//Funciones
 	useEffect(() => {
-		getUserList()
-	}, [])
+		getContent()
+	}, [page])
 
-	async function getUserList() {
-		let res = await getDeactivatedUsers()
-		console.log(res)
+	async function getContent(){
+		const searchInput = document.getElementById("searchInput").value
+		let res
+		if(searchInput == ""){
+			res = await getDeactivatedUsers(page)
+		}else{
+			res = await getSearchedSDeactivatedUsers(searchInput, page)
+		}
 		setShowList(res.data)
 	}
-
-	async function getSearchedUserList(text) {
-			let res
-			if (text==""){
-				res = await getDeactivatedUsers()
-			}else{
-				res = await getSearchedSDeactivatedUsers(text)
-			}
-			setShowList(res.data)
-		}
 
 	return(
 		<div className='UserAdministration Page'>
 			<Divider><h1>Usuarios inactivos</h1></Divider>
 			{contextHolder}
 			<div className='searchBar' >
-				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' onChange={(a) => {getSearchedUserList(a.target.value)}}/>
+				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' id='searchInput' onChange={() => getContent()}/>
 			</div>
 			<div className='listContainer' >
 				<List bordered className='mainList'>
@@ -58,6 +55,8 @@ const UserReactivation = () => {
 					)) }
 				</List>
 			</div>
+
+			<Pagination page={page} setPage={setPage}/>
 
             <ReactivateUser 
                 open={reactivateModal}
