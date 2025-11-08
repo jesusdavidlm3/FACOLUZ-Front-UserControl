@@ -39,13 +39,13 @@ const UserAdministration = () => {
 
 	return(
 		<div className='UserAdministration Page'>
-			<Divider><h1>Administracion de usuarios</h1></Divider>
+			<Divider className='PageTitle'><h1>Administracion de usuarios</h1></Divider>
 			{contextHolder}
 			<div className='searchBar' >
 				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' id='searchInput' onChange={() => getContent()}/>
 				<Button variant='solid' color='primary' onClick={() => setNewUserModal(true)}>Agregar usuario</Button>
 			</div>
-			<div className='listContainer' >
+			<div className='listContainer Content' >
 				<List bordered className='mainList' size='small'>
 					{ showList.map(item => (
 						<List.Item className='listItem' key={item.id}>
@@ -59,10 +59,12 @@ const UserAdministration = () => {
 							</div>
 						</List.Item>
 					)) }
+					<Pagination page={page} setPage={setPage}/>
 				</List>
 			</div>
 
-			<Pagination page={page} setPage={setPage}/>
+            <div className='EmptyFooter'/>
+
 
 			<AddNewUser
 				open={addNewUserModal}

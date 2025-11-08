@@ -23,8 +23,8 @@ const ChangeLogs = () => {
 
     return(
         <div className="UserAdministration Page">
-            <Divider><h1>Registro de cambios</h1></Divider>
-            <div className='listContainer'>
+            <Divider className='PageTitle'><h1>Registro de cambios</h1></Divider>
+            <div className='listContainer Content'>
                 <List bordered className='mainList' size='small'>
                     {showList.map(item => (
                         <List.Item className='listItem'>
@@ -35,9 +35,10 @@ const ChangeLogs = () => {
                             </h3>
                         </List.Item>
                     ))}
+                <Pagination page={page} setPage={setPage}/>
                 </List>
             </div>
-            <Pagination page={page} setPage={setPage}/>
+            <div className='EmptyFooter'/>
         </div>
     )
 }

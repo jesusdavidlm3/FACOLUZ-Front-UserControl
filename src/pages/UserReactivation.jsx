@@ -36,12 +36,12 @@ const UserReactivation = () => {
 
 	return(
 		<div className='UserAdministration Page'>
-			<Divider><h1>Usuarios inactivos</h1></Divider>
+			<Divider className='PageTitle'><h1>Usuarios inactivos</h1></Divider>
 			{contextHolder}
 			<div className='searchBar' >
 				<Input.Search placeholder='Ingrese cedula o nombre de algun usuario' id='searchInput' onChange={() => getContent()}/>
 			</div>
-			<div className='listContainer' >
+			<div className='listContainer Content' >
 				<List bordered className='mainList'>
 					{ showList.map(item => (
 						<List.Item className='listItem' >
@@ -53,10 +53,11 @@ const UserReactivation = () => {
 							</div>
 						</List.Item>
 					)) }
+					<Pagination page={page} setPage={setPage}/>
 				</List>
 			</div>
 
-			<Pagination page={page} setPage={setPage}/>
+			<div className='EmptyFooter'/>
 
             <ReactivateUser 
                 open={reactivateModal}
